@@ -1,11 +1,21 @@
 from transformers import BertTokenizer, BertForQuestionAnswering
 import torch
 
-# Load LegalBERT
-tokenizer = BertTokenizer.from_pretrained("nlpaueb/legal-bert-base-uncased")
-model = BertForQuestionAnswering.from_pretrained("nlpaueb/legal-bert-base-uncased")
+# Load fine-tuned LegalBERT model
+model_path = "./legalbert_finetuned"
+tokenizer = BertTokenizer.from_pretrained(model_path)
+model = BertForQuestionAnswering.from_pretrained(model_path)
 
-def get_legal_answer(question, context):
+def get_legal_answer(question):
+    """
+    Processes the question using the fine-tuned LegalBERT model.
+    Returns the extracted legal answer.
+    """
+
+    # Placeholder context (Replace this with actual legal text retrieval)
+    context = "Legal information related to housing, rights, and compliance."
+
+    # Tokenize input
     inputs = tokenizer(question, context, return_tensors="pt", truncation=True, max_length=1024)
 
     with torch.no_grad():
